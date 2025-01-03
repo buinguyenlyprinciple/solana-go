@@ -463,6 +463,15 @@ func (mx *Message) ResolveLookups() (err error) {
 	return nil
 }
 
+func (mx *Message) ForceResolveLookups(atlAccounts PublicKeySlice) {
+	if mx.resolved {
+		return
+	}
+
+	mx.AccountKeys = append(mx.AccountKeys, atlAccounts...)
+	mx.resolved = true
+}
+
 func (mx Message) IsResolved() bool {
 	return mx.resolved
 }
