@@ -705,10 +705,6 @@ func (m Message) Signers() PublicKeySlice {
 
 // Writable returns the pubkeys of all accounts that are writable.
 func (m Message) Writable() (out PublicKeySlice, err error) {
-	err = m.checkPreconditions()
-	if err != nil {
-		return nil, err
-	}
 	accountKeys, err := m.GetAllKeys()
 	if err != nil {
 		return nil, err
@@ -760,10 +756,6 @@ func (m Message) Account(index uint16) (PublicKey, error) {
 
 // GetAccountIndex returns the index of the given account (first occurrence of the account).
 func (m Message) GetAccountIndex(account PublicKey) (uint16, error) {
-	err := m.checkPreconditions()
-	if err != nil {
-		return 0, err
-	}
 	accountKeys, err := m.GetAllKeys()
 	if err != nil {
 		return 0, err
@@ -779,10 +771,6 @@ func (m Message) GetAccountIndex(account PublicKey) (uint16, error) {
 }
 
 func (m Message) HasAccount(account PublicKey) (bool, error) {
-	err := m.checkPreconditions()
-	if err != nil {
-		return false, err
-	}
 	accountKeys, err := m.GetAllKeys()
 	if err != nil {
 		return false, err
@@ -824,10 +812,6 @@ func (m Message) isWritableInLookups(idx int) bool {
 }
 
 func (m Message) IsWritable(account PublicKey) (bool, error) {
-	err := m.checkPreconditions()
-	if err != nil {
-		return false, err
-	}
 	accountKeys, err := m.GetAllKeys()
 	if err != nil {
 		return false, err
